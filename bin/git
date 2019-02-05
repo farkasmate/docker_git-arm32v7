@@ -1,0 +1,3 @@
+#!/bin/bash
+
+docker run --rm -it --volume $PWD:/repo/:rw matefarkas/git-arm32v7:latest $@
