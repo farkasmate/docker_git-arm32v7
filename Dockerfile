@@ -2,6 +2,7 @@ FROM arm32v7/ubuntu:latest
 
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
+    ca-certificates \
     git \
   && rm -rf /var/lib/apt/lists/*
 
