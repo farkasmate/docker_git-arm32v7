@@ -1,3 +1,14 @@
 #!/bin/bash
 
-docker run --rm -it --volume $PWD:/repo/:rw matefarkas/git-arm32v7:latest $@
+if [ -z $SSH_AUTH_SOCK ]
+then
+  echo 'SSH agent is not running.'
+  exit 1
+fi
+
+docker run --rm -it \
+  --volume $HOME/.gitconfig:/root/.gitconfig:ro \
+  --volume $PWD:/repo/:rw \
+  --volume $SSH_AUTH_SOCK:$SSH_AUTH_SOCK:ro \
+  --env SSH_AUTH_SOCK \
+  matefarkas/git-arm32v7:latest $@
